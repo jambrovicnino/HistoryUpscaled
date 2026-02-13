@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
 // Style-specific prompts for AI enhancement
 const STYLE_PROMPTS = {
@@ -37,7 +37,7 @@ Return ONLY the enhanced image without any additional text or explanation.`
 // Maximum file size: 10MB (in bytes)
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -138,6 +138,8 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Error processing image:', error);
+    console.error('Error stack:', error.stack);
+    console.error('Error message:', error.message);
 
     // Handle specific error types
     if (error.message?.includes('quota')) {
@@ -156,7 +158,8 @@ export default async function handler(req, res) {
 
     return res.status(500).json({
       success: false,
-      error: 'Something went wrong. Please try again or contact support.'
+      error: `Server error: ${error.message}`,
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 }
