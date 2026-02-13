@@ -1,5 +1,5 @@
-const Replicate = require('replicate');
-const fetch = require('node-fetch');
+import Replicate from 'replicate';
+import fetch from 'node-fetch';
 
 // Replicate model configurations for different styles
 // Using known working models with simplified config
@@ -36,7 +36,7 @@ const STYLE_MODELS = {
 // Maximum file size: 10MB (in bytes)
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
 
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
