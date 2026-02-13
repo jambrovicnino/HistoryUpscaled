@@ -1,9 +1,16 @@
 import { useRef, useState } from 'react';
 import './PhotoUploader.css';
 
-export default function PhotoUploader({ preview, onFileSelect }) {
+export default function PhotoUploader({
+  preview,
+  onFileSelect,
+  isProcessing = false,
+  originalImage = null,
+  processedImage = null
+}) {
   const inputRef = useRef();
   const [dragging, setDragging] = useState(false);
+  const [showComparison, setShowComparison] = useState(false);
 
   const handleFile = (file) => {
     if (!file) return;
@@ -32,9 +39,47 @@ export default function PhotoUploader({ preview, onFileSelect }) {
   if (preview) {
     return (
       <div className="preview-area">
-        <img src={preview} alt="Preview" className="preview-image" />
+        {/* Processing Overlay */}
+        {isProcessing && (
+          <div className="processing-overlay">
+            <div className="spinner" />
+            <p className="processing-text">AI is enhancing your photo...</p>
+            <p className="processing-time">This takes 15-30 seconds</p>
+          </div>
+        )}
+
+        {/* Comparison View */}
+        {showComparison && originalImage && processedImage ? (
+          <div className="comparison-view">
+            <div className="comparison-image-container">
+              <div className="comparison-image">
+                <img src={originalImage} alt="Original" />
+                <span className="comparison-label">Original</span>
+              </div>
+              <div className="comparison-image">
+                <img src={processedImage} alt="Enhanced" />
+                <span className="comparison-label">Enhanced</span>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <img src={preview} alt="Preview" className="preview-image" />
+        )}
+
         <div className="preview-actions">
-          <button className="btn-secondary" onClick={() => onFileSelect(null, null)}>
+          {processedImage && !isProcessing && (
+            <button
+              className="btn-secondary"
+              onClick={() => setShowComparison(!showComparison)}
+            >
+              {showComparison ? 'Hide' : 'Show'} Comparison
+            </button>
+          )}
+          <button
+            className="btn-secondary"
+            onClick={() => onFileSelect(null, null)}
+            disabled={isProcessing}
+          >
             Change Photo
           </button>
         </div>

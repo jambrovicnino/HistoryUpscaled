@@ -7,6 +7,8 @@ import PhotoUploader from '../components/service/PhotoUploader';
 import FrameSizeSelector from '../components/service/FrameSizeSelector';
 import FrameColorSelector from '../components/service/FrameColorSelector';
 import PriceSummary from '../components/service/PriceSummary';
+import StyleSelector from '../components/service/StyleSelector';
+import { upscaleImage } from '../services/geminiService';
 import './ServicePage.css';
 
 export default function ServicePage() {
@@ -21,6 +23,12 @@ export default function ServicePage() {
   const [selectedSize, setSelectedSize] = useState('8x10');
   const [selectedColor, setSelectedColor] = useState('black');
   const [added, setAdded] = useState(false);
+
+  // AI Enhancement state
+  const [selectedStyle, setSelectedStyle] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [originalImage, setOriginalImage] = useState(null);
+  const [processedImage, setProcessedImage] = useState(null);
 
   const price = useMemo(() => {
     if (!service) return 0;
@@ -40,6 +48,41 @@ export default function ServicePage() {
   const handleFileSelect = (dataUrl, name) => {
     setPreview(dataUrl);
     setFileName(name || '');
+    // Reset AI enhancement state when new file is selected
+    setSelectedStyle(null);
+    setOriginalImage(null);
+    setProcessedImage(null);
+  };
+
+  const handleStyleSelect = async (style) => {
+    if (!preview) return;
+
+    setSelectedStyle(style);
+
+    // Store original image on first enhancement
+    if (!originalImage) {
+      setOriginalImage(preview);
+    }
+
+    setIsProcessing(true);
+
+    try {
+      const result = await upscaleImage(preview, style);
+
+      if (result.success && result.processedImage) {
+        setPreview(result.processedImage);
+        setProcessedImage(result.processedImage);
+      } else {
+        throw new Error(result.error || 'Enhancement failed');
+      }
+    } catch (error) {
+      console.error('Enhancement failed:', error);
+      alert(error.message || 'Failed to enhance photo. Please try again.');
+      // Reset style selection on error
+      setSelectedStyle(null);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleAddToCart = () => {
@@ -60,6 +103,11 @@ export default function ServicePage() {
       frameColor: selectedColor,
       frameColorLabel: colorObj.label,
       price,
+      // AI Enhancement metadata
+      originalImage: originalImage || null,
+      aiStyle: selectedStyle || null,
+      aiProcessed: !!processedImage,
+      aiProcessedAt: processedImage ? new Date().toISOString() : null,
     });
 
     setAdded(true);
@@ -79,10 +127,31 @@ export default function ServicePage() {
 
         <div className="service-page-grid">
           <div className="service-page-left">
-            <PhotoUploader preview={preview} onFileSelect={handleFileSelect} />
+            <PhotoUploader
+              preview={preview}
+              onFileSelect={handleFileSelect}
+              isProcessing={isProcessing}
+              originalImage={originalImage}
+              processedImage={processedImage}
+            />
           </div>
 
           <div className="service-page-right">
+            {/* AI Enhancement Style Selection */}
+            <StyleSelector
+              selectedStyle={selectedStyle}
+              onSelect={handleStyleSelect}
+              disabled={!preview || isProcessing}
+            />
+
+            {/* Processing Status Indicator */}
+            {isProcessing && (
+              <div className="processing-status">
+                ✨ Enhancing your photo...
+              </div>
+            )}
+
+            {/* Frame Options */}
             <FrameSizeSelector
               basePrice={service.basePrice}
               selectedSize={selectedSize}
@@ -96,7 +165,7 @@ export default function ServicePage() {
             <button
               className="add-to-cart-btn"
               onClick={handleAddToCart}
-              disabled={!preview}
+              disabled={!preview || isProcessing}
             >
               {added ? 'Added!' : 'Add to Cart'}
             </button>
