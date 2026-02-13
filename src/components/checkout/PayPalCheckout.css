@@ -1,0 +1,11 @@
+.paypal-checkout {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+}
+
+.paypal-checkout h3 {
+  margin-bottom: 1.5rem;
+  color: var(--dark);
+}

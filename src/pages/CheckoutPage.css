@@ -1,0 +1,36 @@
+.checkout-page {
+  padding: 3rem 0 5rem;
+  min-height: 60vh;
+}
+
+.checkout-page h1 {
+  color: var(--dark);
+  margin-bottom: 2rem;
+}
+
+.checkout-empty {
+  text-align: center;
+  padding-top: 6rem;
+}
+
+.checkout-empty h2 {
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.checkout-empty p {
+  color: var(--muted);
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+}

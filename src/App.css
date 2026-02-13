@@ -1,0 +1,133 @@
+/* CSS Variables & Reset */
+:root {
+  --primary-start: #667eea;
+  --primary-end: #764ba2;
+  --dark: #2c3e50;
+  --dark-alt: #34495e;
+  --accent: #f39c12;
+  --accent-hover: #e67e22;
+  --success: #27ae60;
+  --muted: #7f8c8d;
+  --light-bg: #f8f9fa;
+  --border: #ecf0f1;
+  --card-radius: 15px;
+  --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  --pill-radius: 50px;
+  --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --premium-start: #9b59b6;
+  --premium-end: #8e44ad;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-stack);
+  line-height: 1.6;
+  color: #333;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: var(--font-stack);
+}
+
+/* Shared button styles */
+.btn-primary {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: var(--success);
+  color: white;
+}
+.btn-primary:hover {
+  background: #229954;
+}
+
+.btn-secondary {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: var(--border);
+  color: var(--dark);
+}
+.btn-secondary:hover {
+  background: #bdc3c7;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 15px 40px;
+  border-radius: var(--pill-radius);
+  font-size: 1.1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+}
+.cta-button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--dark);
+}
+.section-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin-bottom: 3rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideIn {
+  from { transform: translateY(-50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes fadeInUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
