@@ -2,32 +2,33 @@ const Replicate = require('replicate');
 const fetch = require('node-fetch');
 
 // Replicate model configurations for different styles
+// Using known working models with simplified config
 const STYLE_MODELS = {
   'bw-preserve': {
     model: 'nightmareai/real-esrgan:f121d640bd286e1fdc67f9799164c1d5be36ff74576ee11c803ae5b665dd46aa',
     description: 'Real-ESRGAN for B&W upscaling and enhancement',
     input: (imageUrl) => ({
       image: imageUrl,
-      scale: 4,
-      face_enhance: true
+      scale: 2,  // Reduced from 4 for faster processing
+      face_enhance: false
     })
   },
   'colorize': {
-    model: 'arielreplicate/deoldify_image:0da600fab0c45a66211339f3bc6d5306f0a3559a029d32435d01db375f6c01d',
-    description: 'DeOldify for colorization',
+    model: 'nightmareai/real-esrgan:f121d640bd286e1fdc67f9799164c1d5be36ff74576ee11c803ae5b665dd46aa',
+    description: 'Real-ESRGAN upscaling (colorize using same model for now)',
     input: (imageUrl) => ({
       image: imageUrl,
-      render_factor: 35
-    }),
-    fallback: 'nightmareai/real-esrgan:f121d640bd286e1fdc67f9799164c1d5be36ff74576ee11c803ae5b665dd46aa'
+      scale: 2,
+      face_enhance: false
+    })
   },
   'random': {
     model: 'nightmareai/real-esrgan:f121d640bd286e1fdc67f9799164c1d5be36ff74576ee11c803ae5b665dd46aa',
     description: 'Real-ESRGAN with creative enhancement',
     input: (imageUrl) => ({
       image: imageUrl,
-      scale: 4,
-      face_enhance: true
+      scale: 2,
+      face_enhance: false
     })
   }
 };
