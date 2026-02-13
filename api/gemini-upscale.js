@@ -1,4 +1,5 @@
 const Replicate = require('replicate');
+const fetch = require('node-fetch');
 
 // Replicate model configurations for different styles
 const STYLE_MODELS = {
@@ -12,7 +13,7 @@ const STYLE_MODELS = {
     })
   },
   'colorize': {
-    model: 'arielreplicate/deoldify_image:0da600fab0c45a66211339f3bc6ds5306f0a3559a029d32435d01db375f6c01d',
+    model: 'arielreplicate/deoldify_image:0da600fab0c45a66211339f3bc6d5306f0a3559a029d32435d01db375f6c01d',
     description: 'DeOldify for colorization',
     input: (imageUrl) => ({
       image: imageUrl,
@@ -140,9 +141,18 @@ module.exports = async function handler(req, res) {
 
     console.log('Processed image URL:', processedImageUrl);
 
+    // Validate the URL
+    if (!processedImageUrl || typeof processedImageUrl !== 'string') {
+      throw new Error('Invalid output from Replicate model');
+    }
+
     // Fetch the processed image
-    const fetch = require('node-fetch');
     const imageResponse = await fetch(processedImageUrl);
+
+    if (!imageResponse.ok) {
+      throw new Error(`Failed to fetch processed image: ${imageResponse.status}`);
+    }
+
     const imageBuffer = await imageResponse.buffer();
     const processedBase64 = imageBuffer.toString('base64');
     const processedDataUri = `data:image/png;base64,${processedBase64}`;
