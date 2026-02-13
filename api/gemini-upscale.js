@@ -1,37 +1,34 @@
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const Replicate = require('replicate');
 
-// Style-specific prompts for AI enhancement
-const STYLE_PROMPTS = {
-  'bw-preserve': `You are an expert photo restoration specialist. Enhance this black and white photograph by:
-- Preserving the monochrome aesthetic (keep it black and white)
-- Increasing clarity and sharpness
-- Removing noise and grain while maintaining natural texture
-- Enhancing contrast for better depth
-- Upscaling to 4K resolution (3840x2160) with optimal quality
-- Maintaining the historical authenticity of the image
-
-Return ONLY the enhanced image without any additional text or explanation.`,
-
-  'colorize': `You are an expert photo colorization specialist. Transform this photograph by:
-- Adding historically accurate colorization based on the era and context
-- Using natural, period-appropriate colors
-- Enhancing overall image quality and clarity
-- Removing noise and grain
-- Upscaling to 4K resolution (3840x2160)
-- Ensuring smooth color transitions and realistic skin tones
-- Maintaining the historical authenticity while adding vibrant, lifelike colors
-
-Return ONLY the enhanced and colorized image without any additional text or explanation.`,
-
-  'random': `You are a creative photo enhancement artist. Apply your artistic judgment to enhance this photograph by:
-- Choosing an appropriate style (could be subtle enhancement, dramatic colorization, or artistic interpretation)
-- Enhancing quality, clarity, and detail
-- Upscaling to 4K resolution (3840x2160)
-- Removing imperfections while maintaining character
-- Creating a visually stunning result
-- Feel free to be creative while respecting the original subject matter
-
-Return ONLY the enhanced image without any additional text or explanation.`
+// Replicate model configurations for different styles
+const STYLE_MODELS = {
+  'bw-preserve': {
+    model: 'nightmareai/real-esrgan:f121d640bd286e1fdc67f9799164c1d5be36ff74576ee11c803ae5b665dd46aa',
+    description: 'Real-ESRGAN for B&W upscaling and enhancement',
+    input: (imageUrl) => ({
+      image: imageUrl,
+      scale: 4,
+      face_enhance: true
+    })
+  },
+  'colorize': {
+    model: 'arielreplicate/deoldify_image:0da600fab0c45a66211339f3bc6ds5306f0a3559a029d32435d01db375f6c01d',
+    description: 'DeOldify for colorization',
+    input: (imageUrl) => ({
+      image: imageUrl,
+      render_factor: 35
+    }),
+    fallback: 'nightmareai/real-esrgan:f121d640bd286e1fdc67f9799164c1d5be36ff74576ee11c803ae5b665dd46aa'
+  },
+  'random': {
+    model: 'nightmareai/real-esrgan:f121d640bd286e1fdc67f9799164c1d5be36ff74576ee11c803ae5b665dd46aa',
+    description: 'Real-ESRGAN with creative enhancement',
+    input: (imageUrl) => ({
+      image: imageUrl,
+      scale: 4,
+      face_enhance: true
+    })
+  }
 };
 
 // Maximum file size: 10MB (in bytes)
@@ -67,7 +64,7 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    if (!STYLE_PROMPTS[style]) {
+    if (!STYLE_MODELS[style]) {
       return res.status(400).json({
         success: false,
         error: 'Invalid style. Must be one of: bw-preserve, colorize, random'
@@ -75,9 +72,18 @@ module.exports = async function handler(req, res) {
     }
 
     // Extract base64 data (remove data:image/...;base64, prefix if present)
-    const base64Data = imageBase64.includes(',')
-      ? imageBase64.split(',')[1]
-      : imageBase64;
+    let base64Data = imageBase64;
+    let mimeType = 'image/jpeg';
+
+    if (imageBase64.includes(',')) {
+      const parts = imageBase64.split(',');
+      base64Data = parts[1];
+      // Extract mime type from data URI
+      const mimeMatch = parts[0].match(/data:(image\/[^;]+)/);
+      if (mimeMatch) {
+        mimeType = mimeMatch[1];
+      }
+    }
 
     // Check file size
     const sizeInBytes = (base64Data.length * 3) / 4;
@@ -88,51 +94,68 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    // Initialize Gemini API
-    const apiKey = process.env.VITE_GEMINI_API_KEY;
+    // Initialize Replicate
+    const apiKey = process.env.REPLICATE_API_TOKEN;
     if (!apiKey) {
-      console.error('VITE_GEMINI_API_KEY is not configured');
+      console.error('REPLICATE_API_TOKEN is not configured');
       return res.status(500).json({
         success: false,
         error: 'Service temporarily unavailable. Please try again later.'
       });
     }
 
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' });
+    const replicate = new Replicate({
+      auth: apiKey,
+    });
 
-    // Prepare the image for Gemini
-    const imagePart = {
-      inlineData: {
-        data: base64Data,
-        mimeType: 'image/jpeg' // Gemini accepts various formats
-      }
-    };
+    // Convert base64 to data URI for Replicate
+    const dataUri = `data:${mimeType};base64,${base64Data}`;
 
-    // Generate enhanced image
+    // Get model configuration
+    const modelConfig = STYLE_MODELS[style];
+
     console.log(`Processing image with style: ${style}`);
-    const result = await model.generateContent([
-      STYLE_PROMPTS[style],
-      imagePart
-    ]);
+    console.log(`Using model: ${modelConfig.model}`);
 
-    const response = await result.response;
-    const text = response.text();
+    // Run the model
+    const output = await replicate.run(
+      modelConfig.model,
+      {
+        input: modelConfig.input(dataUri)
+      }
+    );
 
-    // Check if we got an image back
-    // Note: Gemini 2.0 Flash supports image generation
-    // The response format may vary, so we need to handle it appropriately
+    console.log('Replicate output received');
 
-    // For now, we'll return a success response
-    // In production, you'd extract the actual image data from the response
+    // Replicate returns a URL to the processed image
+    // We need to fetch it and convert to base64
+    let processedImageUrl = output;
+
+    // Handle different output formats
+    if (Array.isArray(output)) {
+      processedImageUrl = output[0];
+    } else if (typeof output === 'object' && output.output) {
+      processedImageUrl = output.output;
+    }
+
+    console.log('Processed image URL:', processedImageUrl);
+
+    // Fetch the processed image
+    const fetch = require('node-fetch');
+    const imageResponse = await fetch(processedImageUrl);
+    const imageBuffer = await imageResponse.buffer();
+    const processedBase64 = imageBuffer.toString('base64');
+    const processedDataUri = `data:image/png;base64,${processedBase64}`;
+
     return res.status(200).json({
       success: true,
-      processedImage: imageBase64, // Placeholder - replace with actual processed image
+      processedImage: processedDataUri,
       metadata: {
         style,
         originalFilename,
         processedAt: new Date().toISOString(),
-        model: 'gemini-2.0-flash-exp'
+        model: modelConfig.model.split(':')[0],
+        description: modelConfig.description
       }
     });
 
@@ -142,7 +165,7 @@ module.exports = async function handler(req, res) {
     console.error('Error message:', error.message);
 
     // Handle specific error types
-    if (error.message?.includes('quota')) {
+    if (error.message?.includes('quota') || error.message?.includes('rate limit')) {
       return res.status(429).json({
         success: false,
         error: 'Service is busy. Please wait a moment and try again.'
