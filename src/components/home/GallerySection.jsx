@@ -50,7 +50,7 @@ export default function GallerySection() {
               className={`collage-item collage-${item.position}`}
               key={item.id}
             >
-              <div className="collage-image-wrap">
+              <div className="collage-image-wrap" data-cursor="brush">
                 <img
                   src={item.src}
                   alt={item.title}

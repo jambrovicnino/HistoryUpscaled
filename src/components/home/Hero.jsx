@@ -50,6 +50,17 @@ export default function Hero() {
 
   return (
     <section className="hero" id="hero">
+      {/* Floating gold dust particles */}
+      <div className="hero-particles">
+        <span className="hero-particle" />
+        <span className="hero-particle" />
+        <span className="hero-particle" />
+        <span className="hero-particle" />
+        <span className="hero-particle" />
+        <span className="hero-particle" />
+        <span className="hero-particle" />
+      </div>
+
       <div className="container">
         <div className="hero-content">
           <p className="hero-established">UST. 2024</p>

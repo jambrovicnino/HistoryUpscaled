@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ScrollToTop from './components/common/ScrollToTop';
+import CursorEffect from './components/CursorEffect';
 import HomePage from './pages/HomePage';
 import StudioPage from './pages/StudioPage';
 import CartPage from './pages/CartPage';
@@ -17,6 +18,7 @@ import './App.css';
 export default function App() {
   return (
     <>
+      <CursorEffect />
       <ScrollToTop />
       <Navbar />
       <main>

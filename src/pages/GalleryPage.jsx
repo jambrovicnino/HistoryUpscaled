@@ -33,7 +33,7 @@ export default function GalleryPage() {
               </p>
             </div>
 
-            <div className="showcase-slider-wrapper">
+            <div className="showcase-slider-wrapper" data-cursor="brush">
               <BeforeAfterSlider
                 originalImage={familyItem.src}
                 processedImage={familyItem.srcAfter}
@@ -76,7 +76,7 @@ export default function GalleryPage() {
               </p>
             </div>
 
-            <div className="showcase-slider-wrapper">
+            <div className="showcase-slider-wrapper" data-cursor="brush">
               <BeforeAfterSlider
                 originalImage={weddingItem.src}
                 processedImage={weddingItem.srcAfter}

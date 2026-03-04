@@ -15,6 +15,7 @@ export default function Navbar() {
       <div className="container navbar-inner">
         <Link to="/" className="logo-group" onClick={closeMenu}>
           <span className="logo-diamond">
+            <span className="diamond-frame" />
             <span className="diamond-inner">E</span>
           </span>
           <div className="logo-text">
