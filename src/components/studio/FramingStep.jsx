@@ -139,14 +139,11 @@ export default function FramingStep({
                     title={`${frame.label} — ${frame.profileDimensions}`}
                   >
                     <div className="frame-thumb">
-                      <div
-                        className="frame-thumb-mini"
-                        style={{
-                          borderWidth: '14px',
-                          borderStyle: 'solid',
-                          borderImage: frame.cssStyle.borderImage,
-                          boxShadow: frame.cssStyle.boxShadow,
-                        }}
+                      <img
+                        src={frame.stripImage}
+                        alt={frame.label}
+                        className="frame-thumb-img"
+                        loading="lazy"
                       />
                     </div>
                     <span className="frame-option-label">{frame.label}</span>
