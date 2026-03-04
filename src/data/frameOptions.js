@@ -177,15 +177,15 @@ export const frameStyles = [
     cssStyle: {
       borderWidth: '7px',
       borderStyle: 'solid',
-      borderImage: 'linear-gradient(135deg, #2d5a3d 0%, #3a7a52 50%, #2d5a3d 100%) 1',
-      boxShadow: 'inset 0 0 5px rgba(0,0,0,0.2), 0 2px 10px rgba(0,0,0,0.3)',
+      borderImage: 'linear-gradient(135deg, #5c2820 0%, #6d2a24 30%, #7a3428 50%, #6d2a24 70%, #5c2820 100%) 1',
+      boxShadow: 'inset 0 0 5px rgba(0,0,0,0.3), 0 2px 10px rgba(0,0,0,0.4)',
     },
   },
   {
     id: 'moderni-crni',
-    label: '1335 Barvne',
+    label: '1335 Natur',
     profile: '1335',
-    description: 'Profil 1335 — barvne, 34 × 13 mm',
+    description: 'Profil 1335 — naravni les, 34 × 13 mm',
     profileDimensions: '34 × 13 mm',
     pricePerTm: 15.79,
     stripImage: '/frames/strips/sirok-gladek-1335.png',
@@ -193,8 +193,8 @@ export const frameStyles = [
     cssStyle: {
       borderWidth: '14px',
       borderStyle: 'solid',
-      borderImage: 'linear-gradient(135deg, #1a1a1a 0%, #333333 40%, #1a1a1a 60%, #2a2a2a 100%) 1',
-      boxShadow: 'inset 0 0 8px rgba(0,0,0,0.5), 0 3px 15px rgba(0,0,0,0.6)',
+      borderImage: 'linear-gradient(135deg, #b5a08c 0%, #c3ae9e 30%, #d0baa8 50%, #c3ae9e 70%, #b5a08c 100%) 1',
+      boxShadow: 'inset 0 0 8px rgba(0,0,0,0.2), 0 3px 15px rgba(0,0,0,0.4)',
     },
   },
   {
@@ -209,15 +209,15 @@ export const frameStyles = [
     cssStyle: {
       borderWidth: '11px',
       borderStyle: 'solid',
-      borderImage: 'linear-gradient(135deg, #6b4226 0%, #8b5e3c 25%, #a0703c 50%, #7a4f30 75%, #6b4226 100%) 1',
+      borderImage: 'linear-gradient(135deg, #4a2d14 0%, #6b4830 25%, #7a5d40 50%, #6b4830 75%, #4a2d14 100%) 1',
       boxShadow: 'inset 0 0 8px rgba(0,0,0,0.3), 0 3px 12px rgba(0,0,0,0.4)',
     },
   },
   {
     id: 'barvni-kocka',
-    label: '3507 Barvne',
+    label: '3507 Oreh',
     profile: '3507',
-    description: 'Profil 3507 — barvne, 33 × 33 mm',
+    description: 'Profil 3507 — orehov les, 33 × 33 mm',
     profileDimensions: '33 × 33 mm',
     pricePerTm: 20.83,
     stripImage: '/frames/strips/cassetta-3507.png',
@@ -225,8 +225,8 @@ export const frameStyles = [
     cssStyle: {
       borderWidth: '16px',
       borderStyle: 'solid',
-      borderImage: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 60%, #1a1a2e 100%) 1',
-      boxShadow: 'inset 0 0 10px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.5)',
+      borderImage: 'linear-gradient(135deg, #5a3a2a 0%, #744e3e 25%, #8c6450 50%, #744e3e 75%, #5a3a2a 100%) 1',
+      boxShadow: 'inset 0 0 10px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.5)',
     },
   },
   {
