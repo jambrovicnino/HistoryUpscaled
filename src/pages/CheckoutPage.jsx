@@ -22,8 +22,9 @@ export default function CheckoutPage() {
         items: cart.map((item) => ({
           enhancement: item.enhancement || 'Brez izboljšave',
           sizeLabel: item.frameSizeLabel || item.frameSize,
-          withFrame: item.withFrame,
-          frameLabel: item.withFrame ? (item.frameLabel || 'Zlati Klasik') : null,
+          productType: item.productType || 'print',
+          frameLabel: item.productType === 'framed' ? (item.frameLabel || '076') : null,
+          withImpasto: item.withImpasto || false,
           price: item.price,
           dedication: item.dedication || '',
           printSpecs: item.printSpecs || null,

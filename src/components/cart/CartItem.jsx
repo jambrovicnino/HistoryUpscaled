@@ -19,7 +19,7 @@ export default function CartItem({ item }) {
         <h4>{enhancementLabel}</h4>
         <p>
           {item.frameSizeLabel}
-          {item.withFrame ? ' · Z okvirjem' : ' · Brez okvirja'}
+          {item.productType === 'framed' ? ' · Z okvirjem' : item.productType === 'stretched' ? ' · S podokvirjem' : ' · Tisk'}
         </p>
         {item.dedication && (
           <p className="cart-item-dedication">&ldquo;{item.dedication}&rdquo;</p>

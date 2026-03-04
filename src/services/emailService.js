@@ -51,7 +51,7 @@ function formatOrderDetails(orderData) {
     const parts = [
       `${i + 1}. ${item.enhancement || 'Brez izboljšave'}`,
       `   Velikost: ${item.sizeLabel || item.size || 'N/A'}`,
-      `   Okvir: ${item.withFrame ? (item.frameLabel || 'Zlati Klasik') : 'Brez okvirja'}`,
+      `   Izdelek: ${item.productType === 'framed' ? 'Z okvirjem (' + (item.frameLabel || '076') + ')' : item.productType === 'stretched' ? 'S podokvirjem' : 'Samo tisk'}`,
       `   Cena: ${item.price} €`,
     ];
     if (item.dedication) {
@@ -144,9 +144,10 @@ export async function sendTestEmail() {
       {
         enhancement: 'Restavracija (TEST)',
         sizeLabel: 'Imperial (40 × 50 cm)',
-        withFrame: true,
-        frameLabel: 'Zlati Klasik',
-        price: 289,
+        productType: 'framed',
+        frameLabel: '076',
+        withImpasto: false,
+        price: 381,
         dedication: 'Testno naročilo',
         printSpecs: { dpi: 300, colorSpace: 'CMYK', format: 'TIFF' },
       },

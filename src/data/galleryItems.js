@@ -19,6 +19,7 @@ export const galleryItems = [
     id: 'featured-2',
     src: '/gallery/wedding-original.jpg',
     srcAfter: '/gallery/wedding-colorized.png',
+    srcFramed: '/gallery/wedding-framed.png',
     title: 'Poročna fotografija, ~1965',
     size: 'Salon (45 × 60 cm)',
     enhancement: 'Restavracija + Barvanje',

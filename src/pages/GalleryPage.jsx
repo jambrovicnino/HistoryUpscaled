@@ -82,6 +82,27 @@ export default function GalleryPage() {
                 processedImage={weddingItem.srcAfter}
               />
             </div>
+
+            {/* Framed Result */}
+            {weddingItem.srcFramed && (
+              <div className="showcase-framed">
+                <div className="showcase-framed-card">
+                  <img
+                    src={weddingItem.srcFramed}
+                    alt="Končni izdelek — poročna fotografija na platnu z okvirjem"
+                    className="showcase-framed-image"
+                    loading="lazy"
+                  />
+                  <div className="showcase-framed-info">
+                    <span className="showcase-framed-badge">KONČNI IZDELEK</span>
+                    <h3 className="showcase-framed-title">Premium Platno z Okvirjem</h3>
+                    <p className="showcase-framed-detail">
+                      {weddingItem.size} · Impasto gel medij · UV-odporne barve
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </section>
       )}

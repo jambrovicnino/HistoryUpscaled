@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { enhanceImage } from '../services/eternaService';
-import { getPrice, getSizeLabel, getPrintSpecs, getFrameLabel } from '../data/frameOptions';
+import { getPrice, getSizeLabel, getPrintSpecs, getFrameLabel, PRODUCT_TYPES } from '../data/frameOptions';
 import StepIndicator from '../components/studio/StepIndicator';
 import EnhancementStep from '../components/studio/EnhancementStep';
 import FramingStep from '../components/studio/FramingStep';
@@ -37,10 +37,11 @@ export default function StudioPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [processedImage, setProcessedImage] = useState(null);
 
-  // Framing state
-  const [selectedFrame, setSelectedFrame] = useState('zlati-klasik');
-  const [selectedSize, setSelectedSize] = useState('40x50'); // Default: Imperial
-  const [withFrame, setWithFrame] = useState(true);
+  // Product configuration state
+  const [selectedSize, setSelectedSize] = useState('40x50');
+  const [productType, setProductType] = useState(PRODUCT_TYPES.PRINT);
+  const [selectedFrame, setSelectedFrame] = useState('siroki-ornament');
+  const [withImpasto, setWithImpasto] = useState(false);
   const [dedication, setDedication] = useState('');
 
   // ─── Enhancement handler ───
@@ -70,18 +71,20 @@ export default function StudioPage() {
 
   // ─── Add to cart ───
   const handleAddToCart = () => {
-    const price = getPrice(selectedSize, withFrame, selectedFrame);
+    const frameId = productType === PRODUCT_TYPES.FRAMED ? selectedFrame : null;
+    const price = getPrice(selectedSize, productType, frameId, withImpasto);
     const sizeLabel = getSizeLabel(selectedSize);
 
     addItem({
       thumbnail: processedImage || initialImage,
       fileName,
       enhancement: selectedEnhancement,
-      frameStyle: withFrame ? selectedFrame : null,
-      frameLabel: withFrame ? getFrameLabel(selectedFrame) : null,
+      productType,
+      frameStyle: frameId,
+      frameLabel: frameId ? getFrameLabel(selectedFrame) : null,
       frameSize: selectedSize,
       frameSizeLabel: sizeLabel,
-      withFrame,
+      withImpasto,
       dedication,
       price,
       originalImage: initialImage,
@@ -114,12 +117,14 @@ export default function StudioPage() {
           {currentStep === 1 && (
             <FramingStep
               image={processedImage || initialImage}
-              selectedFrame={selectedFrame}
-              setSelectedFrame={setSelectedFrame}
               selectedSize={selectedSize}
               setSelectedSize={setSelectedSize}
-              withFrame={withFrame}
-              setWithFrame={setWithFrame}
+              productType={productType}
+              setProductType={setProductType}
+              selectedFrame={selectedFrame}
+              setSelectedFrame={setSelectedFrame}
+              withImpasto={withImpasto}
+              setWithImpasto={setWithImpasto}
               dedication={dedication}
               setDedication={setDedication}
               onAddToCart={handleAddToCart}
