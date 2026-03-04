@@ -35,7 +35,7 @@ export default function Hero() {
 
   const handleViewExample = () => {
     navigate('/studio', {
-      state: { image: '/demo/family-bw.svg', fileName: 'primer.jpg', isDemo: true },
+      state: { image: '/demo/family-portrait.jpg', fileName: 'primer.jpg', isDemo: true },
     });
   };
 
