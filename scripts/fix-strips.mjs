@@ -19,47 +19,45 @@ const RECROP = [
   {
     id: 'ozki-ornament-1717',
     page: 'page-03-1717-ozki-ornament.png',
-    // Dark green strip — row 2, col 5 (darker green, elegant)
-    // Row 2: y ~870-1300, col 5: x ~1190-1400
-    // Crop just the colored face (top 55% of strip), NOT the beige cross-section
-    left: 1170, top: 870, width: 220, height: 260,
-    note: '1717 dark green face',
+    // GREEN strip is at x:1490-1610 (col 6), NOT col 5!
+    // Probed at y=1000: x:1490 R=58,G=71,B=53 = dark green
+    // Crop just the colored face, not beige cross-section
+    left: 1480, top: 895, width: 150, height: 210,
+    note: '1717 dark green face (col 6)',
   },
   {
     id: 'cassetta-3507',
     page: 'page-08-3507-cassetta-a.png',
-    // Black cassetta — row 2, col 3
-    // Row 2: y ~1220-1850, col 3: x ~880-1140
+    // Black cassetta — row 2, col 3 (4 cols, col3 starts ~890)
     // Face only, not the beige bottom
-    left: 880, top: 1230, width: 270, height: 340,
+    left: 890, top: 1240, width: 250, height: 320,
     note: '3507 black cassetta face',
   },
   {
     id: 'alu-srebrn',
     page: 'page-52-AL-srebrn.png',
-    // Silver/grey AL — row 3, col 1
-    // L-shaped profile: face is the left silver portion only
-    // Row 3: y ~1750-2200, col 1: x ~60-230
-    left: 60, top: 1770, width: 180, height: 340,
+    // Silver/grey AL — row 3, col 1 (L-shape, face is left portion)
+    left: 65, top: 1780, width: 160, height: 320,
     note: 'AL silver face',
   },
   {
     id: 'classic-184',
     page: 'page-24-184-classic-odprodaja.png',
-    // Gold ornate classic — row 1, col 2 (center, speckled gold)
-    // This is a wide ornate profile, crop just the face portion
-    // Row 1: y ~80-700, col 2: x ~580-980
-    left: 590, top: 85, width: 370, height: 480,
-    note: '184 gold ornate face',
+    // Gold ornate — row 1, col 2
+    // Probed: WHITE gap at x:580-720, gold starts at x:720
+    // y scan at x=750: white until y:190, grey y:200-210, gold from y:220+
+    // Tight crop on gold texture only
+    left: 720, top: 225, width: 260, height: 360,
+    note: '184 gold ornate face (precise)',
   },
   {
     id: 'tanka-370',
     page: 'page-37-370-tanka-elegant.png',
     // Bright gold — row 1, left strip
-    // Only the gold face texture, NOT the beige cross-section below
-    // Face area: x:70, y:80, to about y:560
-    left: 65, top: 80, width: 560, height: 490,
-    note: '370 bright gold face',
+    // Must skip Vidal logo at very top (~60px), and the beige cross-section at bottom
+    // Gold face texture runs from roughly y:240 to y:550
+    left: 75, top: 250, width: 530, height: 320,
+    note: '370 bright gold face (below Vidal logo)',
   },
 ];
 
