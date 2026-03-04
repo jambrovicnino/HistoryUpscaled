@@ -1,105 +1,108 @@
-.service-card {
-  background: white;
-  padding: 2.5rem;
-  border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow);
-  transition: all 0.3s;
+/* ─── Eterna Service Card ────────────────────── */
+.eterna-card {
   position: relative;
-  border: 2px solid transparent;
-  display: flex;
-  flex-direction: column;
+  background: var(--bg-card);
+  padding: 40px 28px 32px;
+  transition: all 0.4s ease;
+  overflow: hidden;
 }
 
-.service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+.eterna-card:hover {
+  background: var(--bg-elevated);
 }
 
-.service-card.featured {
-  border-color: var(--accent);
-}
-
-.service-card.premium {
-  border-color: var(--premium-start);
-  background: linear-gradient(135deg, #fff 0%, #f8f3ff 100%);
-}
-
-.badge {
+/* ─── Corner Decorations ─────────────────────── */
+.card-corner {
   position: absolute;
-  top: -12px;
-  right: 20px;
-  background: var(--accent);
-  color: white;
-  padding: 5px 15px;
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
 }
 
-.premium-badge {
-  background: linear-gradient(135deg, var(--premium-start) 0%, var(--premium-end) 100%);
-}
-
-.service-icon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.service-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-  color: var(--dark);
-}
-
-.service-card p {
-  color: var(--muted);
-  margin-bottom: 1.5rem;
-}
-
-.service-features {
-  list-style: none;
-  margin-bottom: 1.5rem;
-  flex: 1;
-}
-
-.service-features li {
-  padding: 0.5rem 0;
-  color: #555;
-  position: relative;
-  padding-left: 25px;
-}
-
-.service-features li::before {
-  content: "\2713";
-  position: absolute;
+/* Top-left: two gold lines forming an L */
+.card-corner-tl {
+  top: 0;
   left: 0;
-  color: var(--success);
-  font-weight: bold;
+  border-top: 1px solid var(--gold-border);
+  border-left: 1px solid var(--gold-border);
 }
 
-.service-price {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--dark);
-  margin-bottom: 1.5rem;
+.card-corner-tr {
+  top: 0;
+  right: 0;
+  border-top: 1px solid var(--gold-border);
+  border-right: 1px solid var(--gold-border);
 }
 
-.select-service-btn {
+.card-corner-bl {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1px solid var(--gold-border);
+  border-left: 1px solid var(--gold-border);
+}
+
+.card-corner-br {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid var(--gold-border);
+  border-right: 1px solid var(--gold-border);
+}
+
+/* ─── Card Body ──────────────────────────────── */
+.card-body {
+  position: relative;
+}
+
+.card-numeral {
   display: block;
-  width: 100%;
-  padding: 12px;
-  background: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-end) 100%);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 16px;
+  line-height: 1;
 }
 
-.select-service-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.card-title-bar {
+  width: 3px;
+  height: 18px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.card-description {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ─── Mobile ────────────────────────────────── */
+@media (max-width: 768px) {
+  .eterna-card {
+    padding: 32px 24px 28px;
+  }
+
+  .card-numeral {
+    font-size: 1.8rem;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
 }

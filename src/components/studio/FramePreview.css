@@ -1,0 +1,46 @@
+/* ─── Frame Preview ──────────────────────────── */
+.frame-preview-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.frame-preview {
+  width: 100%;
+  max-width: 520px;
+  transition: all 0.4s ease;
+}
+
+.frame-preview.has-frame {
+  /* Frame CSS is applied via inline style from frameStyles data */
+  padding: 0;
+}
+
+/* Platno z razmerjem stranic — obreže sliko po sredini */
+.frame-preview-canvas {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #111;
+}
+
+.frame-preview-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.frame-preview-size {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+}

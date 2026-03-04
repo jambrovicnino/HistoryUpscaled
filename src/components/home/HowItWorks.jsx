@@ -1,10 +1,10 @@
+import { Link } from 'react-router-dom';
 import './HowItWorks.css';
 
 const steps = [
-  { num: 1, title: 'Choose Your Service', text: 'Select the restoration option that best fits your photo.' },
-  { num: 2, title: 'Upload Your Photo', text: 'Securely upload your digital photo for processing.' },
-  { num: 3, title: 'AI Enhancement', text: 'Our advanced AI restores and enhances your image to perfection.' },
-  { num: 4, title: 'Premium Framing', text: 'Your restored portrait arrives in a museum-quality frame.' },
+  { num: 1, title: 'Upload Your Photo', icon: '⬆', text: 'Upload your cherished memories' },
+  { num: 2, title: 'Choose Your Magic', icon: '🪄', text: 'Select your restoration style' },
+  { num: 3, title: 'Download Your Legacy', icon: '⬇', text: 'Receive your enhanced photo' },
 ];
 
 export default function HowItWorks() {
@@ -12,14 +12,23 @@ export default function HowItWorks() {
     <section id="how-it-works" className="how-it-works">
       <div className="container">
         <h2 className="section-title">How It Works</h2>
-        <div className="steps-grid">
+        <div className="steps-container">
           {steps.map((s) => (
-            <div className="step" key={s.num}>
-              <div className="step-number">{s.num}</div>
-              <h3>{s.title}</h3>
-              <p>{s.text}</p>
+            <div className="step-item" key={s.num}>
+              <div className="step-icon-circle">
+                <span className="step-icon">{s.icon}</span>
+              </div>
+              <div className="step-text">
+                <span className="step-number">{s.num}.</span> {s.title}
+              </div>
             </div>
           ))}
+        </div>
+        <div className="cta-section">
+          <Link to="/service/bw-upscaled" className="cta-button-large">
+            Upload Your First Photo
+          </Link>
+          <p className="cta-subtext">First restoration is on us.</p>
         </div>
       </div>
     </section>

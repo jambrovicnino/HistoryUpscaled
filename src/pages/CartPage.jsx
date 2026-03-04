@@ -10,16 +10,16 @@ export default function CartPage() {
   if (cart.length === 0) {
     return (
       <div className="cart-page container cart-empty">
-        <h2>Your Cart is Empty</h2>
-        <p>Looks like you haven't added any items yet.</p>
-        <Link to="/" className="cta-button">Browse Services</Link>
+        <h2>Vaša košarica je prazna</h2>
+        <p>Dodajte izdelke za nadaljevanje.</p>
+        <Link to="/" className="btn-gold">NAZAJ NA ZAČETEK</Link>
       </div>
     );
   }
 
   return (
     <div className="cart-page container">
-      <h1>Shopping Cart</h1>
+      <h1>Košarica</h1>
       <div className="cart-layout">
         <div className="cart-items">
           {cart.map((item) => (

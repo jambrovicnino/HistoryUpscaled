@@ -9,7 +9,7 @@ export default function PayPalCheckout({ onSuccess }) {
     return actions.order.create({
       purchase_units: [
         {
-          description: 'HistoryUpscaled Order',
+          description: 'Eterna Naročilo',
           amount: {
             value: subtotal.toFixed(2),
           },
@@ -20,7 +20,7 @@ export default function PayPalCheckout({ onSuccess }) {
 
   const onApprove = (data, actions) => {
     return actions.order.capture().then(() => {
-      const ref = 'HU-' + Date.now().toString(36).toUpperCase();
+      const ref = 'ET-' + Date.now().toString(36).toUpperCase();
       clearCart();
       onSuccess(ref);
     });
@@ -30,9 +30,9 @@ export default function PayPalCheckout({ onSuccess }) {
 
   return (
     <div className="paypal-checkout">
-      <h3>Pay with PayPal</h3>
+      <h3>Plačajte s PayPal</h3>
       <PayPalButtons
-        style={{ layout: 'vertical', shape: 'pill' }}
+        style={{ layout: 'vertical', shape: 'rect', color: 'gold' }}
         createOrder={createOrder}
         onApprove={onApprove}
       />

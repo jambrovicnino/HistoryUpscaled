@@ -4,7 +4,11 @@
 }
 
 .checkout-page h1 {
-  color: var(--dark);
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
   margin-bottom: 2rem;
 }
 
@@ -14,12 +18,14 @@
 }
 
 .checkout-empty h2 {
-  color: var(--dark);
+  font-family: var(--font-heading);
+  font-weight: 400;
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
 .checkout-empty p {
-  color: var(--muted);
+  color: var(--text-secondary);
 }
 
 .checkout-layout {

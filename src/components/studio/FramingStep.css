@@ -1,0 +1,305 @@
+/* ═══════════════════════════════════════════════
+   ETERNA — Framing Step
+   ═══════════════════════════════════════════════ */
+
+.framing-step {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ─── Preview ────────────────────────────────── */
+.framing-preview {
+  position: sticky;
+  top: 100px;
+}
+
+/* ─── Controls ───────────────────────────────── */
+.framing-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 8px 0;
+}
+
+/* ─── Sections ───────────────────────────────── */
+.framing-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.framing-label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* ─── Dedication Input ───────────────────────── */
+.dedication-input-wrap {
+  position: relative;
+}
+
+.dedication-input {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.dedication-input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.dedication-input:focus {
+  border-color: var(--gold-border);
+}
+
+.dedication-icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+/* ─── Frame Toggle ───────────────────────────── */
+.frame-toggle {
+  display: flex;
+  gap: 0;
+  border: 1px solid var(--border-subtle);
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 10px 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.toggle-btn.active {
+  background: var(--gold-muted);
+  color: var(--gold);
+  border-bottom: 2px solid var(--gold);
+}
+
+/* ═══════════════════════════════════════════════
+   FRAME OPTIONS — Real frame strip thumbnails
+   ═══════════════════════════════════════════════ */
+.frame-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 4px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Scrollbar styling */
+.frame-options::-webkit-scrollbar {
+  width: 4px;
+}
+
+.frame-options::-webkit-scrollbar-thumb {
+  background: var(--gold-border);
+  border-radius: 2px;
+}
+
+.frame-options::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.frame-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background: transparent;
+  border: 2px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.frame-option:hover {
+  border-color: var(--gold-border);
+  background: rgba(201, 168, 76, 0.03);
+}
+
+.frame-option.selected {
+  border-color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ─── Frame thumbnail image ──────────────────── */
+.frame-thumb {
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+
+.frame-thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.frame-option:hover .frame-thumb-img {
+  transform: scale(1.05);
+}
+
+.frame-option-label {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.frame-option.selected .frame-option-label {
+  color: var(--gold);
+}
+
+/* ═══════════════════════════════════════════════
+   SIZE OPTIONS — Scrollable list for all sizes
+   ═══════════════════════════════════════════════ */
+.size-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border-subtle);
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+.size-options::-webkit-scrollbar {
+  width: 4px;
+}
+
+.size-options::-webkit-scrollbar-thumb {
+  background: var(--gold-border);
+  border-radius: 2px;
+}
+
+.size-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: left;
+}
+
+.size-option:last-child {
+  border-bottom: none;
+}
+
+.size-option:hover {
+  background: var(--gold-glow);
+}
+
+.size-option.selected {
+  background: var(--gold-muted);
+}
+
+.size-option.selected .size-name {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.size-name {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.size-dims {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* ─── Price ──────────────────────────────────── */
+.framing-price {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 0;
+}
+
+.price-amount {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--gold);
+  letter-spacing: 0.02em;
+}
+
+.price-note {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .framing-step {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .framing-preview {
+    position: static;
+  }
+
+  .frame-options {
+    grid-template-columns: repeat(3, 1fr);
+    max-height: 260px;
+  }
+
+  .size-options {
+    max-height: 240px;
+  }
+}
+
+@media (max-width: 500px) {
+  .frame-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

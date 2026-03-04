@@ -1,26 +1,24 @@
-import { Link } from 'react-router-dom';
 import './ServiceCard.css';
 
 export default function ServiceCard({ service }) {
-  const { id, name, icon, description, features, basePrice, badge, cardClass } = service;
+  const { romanNumeral, name, description } = service;
 
   return (
-    <div className={`service-card ${cardClass}`}>
-      {badge && (
-        <span className={`badge ${cardClass === 'premium' ? 'premium-badge' : ''}`}>
-          {badge}
-        </span>
-      )}
-      <div className="service-icon">{icon}</div>
-      <h3>{name}</h3>
-      <p>{description}</p>
-      <ul className="service-features">
-        {features.map((f) => (
-          <li key={f}>{f}</li>
-        ))}
-      </ul>
-      <div className="service-price">From ${basePrice}</div>
-      <Link to={`/service/${id}`} className="select-service-btn">Select Service</Link>
+    <div className="eterna-card">
+      {/* Corner decorations */}
+      <div className="card-corner card-corner-tl" />
+      <div className="card-corner card-corner-tr" />
+      <div className="card-corner card-corner-bl" />
+      <div className="card-corner card-corner-br" />
+
+      <div className="card-body">
+        <span className="card-numeral">{romanNumeral}</span>
+        <h3 className="card-title">
+          <span className="card-title-bar" />
+          {name}
+        </h3>
+        <p className="card-description">{description}</p>
+      </div>
     </div>
   );
 }

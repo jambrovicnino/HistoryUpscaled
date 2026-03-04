@@ -1,23 +1,49 @@
-/* CSS Variables & Reset */
+/* ═══════════════════════════════════════════════
+   ETERNA — Prerojeni Spomini
+   Global Design System
+   ═══════════════════════════════════════════════ */
+
 :root {
-  --primary-start: #667eea;
-  --primary-end: #764ba2;
-  --dark: #2c3e50;
-  --dark-alt: #34495e;
-  --accent: #f39c12;
-  --accent-hover: #e67e22;
-  --success: #27ae60;
-  --muted: #7f8c8d;
-  --light-bg: #f8f9fa;
-  --border: #ecf0f1;
-  --card-radius: 15px;
-  --card-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-  --pill-radius: 50px;
-  --font-stack: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --premium-start: #9b59b6;
-  --premium-end: #8e44ad;
+  /* Core palette */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-card: #141414;
+  --bg-elevated: #1a1a1a;
+  --bg-input: #0f0f0f;
+
+  /* Gold system */
+  --gold: #c9a84c;
+  --gold-light: #d4b96a;
+  --gold-dark: #a88a3a;
+  --gold-muted: rgba(201, 168, 76, 0.12);
+  --gold-border: rgba(201, 168, 76, 0.25);
+  --gold-glow: rgba(201, 168, 76, 0.08);
+
+  /* Text hierarchy */
+  --text-primary: #f0ece4;
+  --text-secondary: #a09888;
+  --text-muted: #5a5248;
+  --text-inverse: #0a0a0a;
+
+  /* Functional */
+  --success: #4a7c59;
+  --error: #c94444;
+  --border: rgba(201, 168, 76, 0.15);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* Typography */
+  --font-heading: 'Cormorant Garamond', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+  --font-body: 'Inter', 'Segoe UI', -apple-system, sans-serif;
+  --font-script: 'Playfair Display', 'Georgia', serif;
+
+  /* Spacing & shapes */
+  --card-radius: 2px;
+  --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --radius-sm: 2px;
+  --radius-md: 4px;
 }
 
+/* ─── Reset ─────────────────────────────────── */
 * {
   margin: 0;
   padding: 0;
@@ -25,16 +51,19 @@
 }
 
 body {
-  font-family: var(--font-stack);
+  font-family: var(--font-body);
   line-height: 1.6;
-  color: #333;
+  color: var(--text-primary);
   overflow-x: hidden;
+  background: var(--bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
 a {
@@ -43,85 +72,141 @@ a {
 }
 
 button {
-  font-family: var(--font-stack);
+  font-family: var(--font-body);
 }
 
-/* Shared button styles */
+/* ─── Button System ─────────────────────────── */
+.btn-gold {
+  display: inline-block;
+  padding: 14px 36px;
+  background: var(--gold);
+  color: var(--text-inverse);
+  border: 1px solid var(--gold);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-gold:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
+.btn-outline {
+  display: inline-block;
+  padding: 14px 36px;
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-outline:hover {
+  background: var(--gold-muted);
+}
+
+.btn-gold-large {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 16px 40px;
+  background: var(--gold);
+  color: var(--text-inverse);
+  border: 1px solid var(--gold);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-gold-large:hover {
+  background: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
+/* Legacy support — map old classes */
 .btn-primary {
   padding: 12px 30px;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s;
-  background: var(--success);
-  color: white;
+  background: var(--gold);
+  color: var(--text-inverse);
 }
 .btn-primary:hover {
-  background: #229954;
+  background: var(--gold-light);
 }
 
 .btn-secondary {
   padding: 12px 30px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border: 1px solid var(--gold-border);
+  border-radius: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s;
-  background: var(--border);
-  color: var(--dark);
+  background: transparent;
+  color: var(--gold);
 }
 .btn-secondary:hover {
-  background: #bdc3c7;
+  background: var(--gold-muted);
 }
 
-.cta-button {
-  display: inline-block;
-  background: var(--accent);
-  color: white;
-  padding: 15px 40px;
-  border-radius: var(--pill-radius);
-  font-size: 1.1rem;
-  font-weight: 600;
-  transition: all 0.3s;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  border: none;
-  cursor: pointer;
-}
-.cta-button:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
-
+/* ─── Typography ────────────────────────────── */
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
   margin-bottom: 1rem;
-  color: var(--dark);
 }
+
 .section-subtitle {
   text-align: center;
-  font-size: 1.1rem;
-  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
   margin-bottom: 3rem;
 }
 
-/* Animations */
+/* ─── Animations ────────────────────────────── */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 @keyframes slideIn {
-  from { transform: translateY(-50px); opacity: 0; }
+  from { transform: translateY(-30px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 @keyframes fadeInUp {
-  from { transform: translateY(30px); opacity: 0; }
+  from { transform: translateY(20px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
 
-/* Scroll reveal */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -130,4 +215,19 @@ button {
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ─── Scrollbar ─────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
 }

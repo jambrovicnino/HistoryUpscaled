@@ -1,13 +1,15 @@
 .order-summary {
-  background: white;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
   padding: 2rem;
-  border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow);
 }
 
 .order-summary h3 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
   margin-bottom: 1.5rem;
-  color: var(--dark);
 }
 
 .order-items {
@@ -29,22 +31,25 @@
 }
 
 .order-item-name {
-  font-weight: 600;
-  color: var(--dark);
+  font-weight: 500;
+  color: var(--text-primary);
+  font-size: 0.9rem;
 }
 
 .order-item-meta {
-  font-size: 0.85rem;
-  color: var(--muted);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
 }
 
 .order-item-qty {
-  color: var(--muted);
+  color: var(--text-muted);
+  font-size: 0.85rem;
   min-width: 30px;
 }
 
 .order-item-price {
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--gold);
   min-width: 70px;
   text-align: right;
 }
@@ -58,7 +63,11 @@
 .order-total {
   display: flex;
   justify-content: space-between;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--dark);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.order-total span:last-child {
+  color: var(--gold);
 }

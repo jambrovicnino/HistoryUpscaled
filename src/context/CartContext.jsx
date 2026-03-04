@@ -4,7 +4,7 @@ const CartContext = createContext();
 
 function loadCart() {
   try {
-    const data = localStorage.getItem('historyupscaled_cart');
+    const data = localStorage.getItem('eterna_cart');
     return data ? JSON.parse(data) : [];
   } catch {
     return [];
@@ -36,7 +36,7 @@ export function CartProvider({ children }) {
   const [cart, dispatch] = useReducer(cartReducer, null, loadCart);
 
   useEffect(() => {
-    localStorage.setItem('historyupscaled_cart', JSON.stringify(cart));
+    localStorage.setItem('eterna_cart', JSON.stringify(cart));
   }, [cart]);
 
   const addItem = (item) => dispatch({ type: 'ADD_ITEM', payload: item });

@@ -1,28 +1,21 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import Hero from '../components/home/Hero';
+import AboutSection from '../components/home/AboutSection';
+import ProcessSection from '../components/home/ProcessSection';
+import GallerySection from '../components/home/GallerySection';
+import TestimonialsSection from '../components/home/TestimonialsSection';
 import ServicesSection from '../components/home/ServicesSection';
-import HowItWorks from '../components/home/HowItWorks';
-import ContactSection from '../components/home/ContactSection';
+import CTASection from '../components/home/CTASection';
 
 export default function HomePage() {
-  const { hash } = useLocation();
-
-  useEffect(() => {
-    if (hash) {
-      const el = document.querySelector(hash);
-      if (el) {
-        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100);
-      }
-    }
-  }, [hash]);
-
   return (
     <>
       <Hero />
+      <AboutSection />
+      <ProcessSection />
+      <GallerySection />
+      <TestimonialsSection />
       <ServicesSection />
-      <HowItWorks />
-      <ContactSection />
+      <CTASection />
     </>
   );
 }
