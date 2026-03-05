@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CameraModal from '../common/CameraModal.jsx';
+import HeroLeaves from './HeroLeaves';
 import './Hero.css';
 
 export default function Hero() {
@@ -50,16 +51,8 @@ export default function Hero() {
 
   return (
     <section className="hero" id="hero">
-      {/* Floating gold dust particles */}
-      <div className="hero-particles">
-        <span className="hero-particle" />
-        <span className="hero-particle" />
-        <span className="hero-particle" />
-        <span className="hero-particle" />
-        <span className="hero-particle" />
-        <span className="hero-particle" />
-        <span className="hero-particle" />
-      </div>
+      {/* Floating gold leaves */}
+      <HeroLeaves />
 
       <div className="container">
         <div className="hero-content">

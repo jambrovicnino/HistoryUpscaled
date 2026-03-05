@@ -46,10 +46,12 @@
 
 .showcase-slider-wrapper {
   max-width: 800px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   border: 1px solid var(--gold-border);
   background: var(--bg-card);
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 /* ─── Framed Result Card ───────────────────────── */
@@ -64,6 +66,8 @@
   border: 1px solid var(--gold-border);
   max-width: 500px;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   overflow: hidden;
 }
 
