@@ -38,33 +38,31 @@
   animation: logo-glow 4s ease-in-out infinite;
 }
 
-/* 3D cube shadow behind diamond */
+/* 3D cube shadow — larger square behind diamond */
 .logo-diamond::before {
   content: '';
   position: absolute;
-  inset: -1px;
+  inset: -6px;
   background: transparent;
-  border: 1px solid rgba(201,168,76,0.12);
-  transform: translate(4px, 4px);
+  border: 1px solid rgba(201,168,76,0.2);
+  transform: translate(5px, 5px);
   z-index: -1;
   transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
               border-color 0.6s ease,
               box-shadow 0.6s ease;
-  box-shadow: 2px 2px 8px rgba(201,168,76,0.08);
+  box-shadow: 3px 3px 12px rgba(201,168,76,0.1);
 }
 
-/* Connector lines for 3D cube effect */
+/* Connector lines for 3D cube depth */
 .logo-diamond::after {
   content: '';
   position: absolute;
-  width: 6px;
-  height: 6px;
-  bottom: -2px;
-  right: -2px;
-  border-right: 1px solid rgba(201,168,76,0.15);
-  border-bottom: 1px solid rgba(201,168,76,0.15);
-  z-index: -1;
-  transition: opacity 0.6s ease;
+  inset: -6px;
+  border: 1px solid rgba(201,168,76,0.08);
+  transform: translate(10px, 10px);
+  z-index: -2;
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1),
+              opacity 0.6s ease;
 }
 
 .logo-group:hover .logo-diamond {
@@ -73,13 +71,14 @@
 }
 
 .logo-group:hover .logo-diamond::before {
-  transform: translate(6px, 6px);
-  border-color: rgba(201,168,76,0.2);
-  box-shadow: 3px 3px 14px rgba(201,168,76,0.15);
+  transform: translate(7px, 7px);
+  border-color: rgba(201,168,76,0.35);
+  box-shadow: 4px 4px 16px rgba(201,168,76,0.18);
 }
 
 .logo-group:hover .logo-diamond::after {
-  opacity: 0.8;
+  transform: translate(13px, 13px);
+  border-color: rgba(201,168,76,0.15);
 }
 
 /* Inner square frame for depth */

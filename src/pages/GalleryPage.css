@@ -2,10 +2,24 @@
    ETERNA — Gallery Page
    ═══════════════════════════════════════════════ */
 
+/* ─── Page Hero (scoped to gallery for independence) ── */
+.gallery-page .page-hero {
+  text-align: center;
+  padding: 6rem 0 4rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--gold-border);
+}
+
 /* ─── Showcase Section ─────────────────────────── */
 .gallery-showcase {
   padding: 5rem 0;
   background: var(--bg-primary);
+}
+
+.gallery-showcase .container {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .gallery-showcase-alt {
@@ -15,6 +29,9 @@
 .showcase-header {
   text-align: center;
   margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .showcase-label {

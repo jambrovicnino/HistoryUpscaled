@@ -56,7 +56,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* ─── Heading ────────────────────────────────── */
+/* ─── Heading — interactive float on hover ─── */
 .hero-heading {
   font-family: var(--font-heading);
   font-size: 4.5rem;
@@ -64,6 +64,20 @@
   color: var(--text-primary);
   line-height: 1.1;
   margin-bottom: 2rem;
+  display: inline-block;
+  transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+              text-shadow 0.8s ease;
+  cursor: default;
+}
+
+.hero-heading:hover {
+  transform: translateY(-6px);
+  text-shadow: 0 8px 24px rgba(201,168,76,0.15),
+               0 2px 8px rgba(201,168,76,0.1);
+}
+
+.hero-heading:hover .hero-heading-script {
+  text-shadow: 0 6px 20px rgba(201,168,76,0.25);
 }
 
 .hero-heading-main {
